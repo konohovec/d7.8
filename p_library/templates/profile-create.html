@@ -1,0 +1,54 @@
+{% block title %}My Library — Create Profile{% endblock %}
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        <div>
+            <div>
+                <form method="POST" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    <div class="form-group">
+
+                        <div class="form-input-fields">
+                            {% csrf_token %}
+                            <div class="avatar-form">
+                                <p class="mt-2"><label>Аватар</label></p>
+                                <p>{{ form.avatar }}</p>
+                            </div>
+                            {% if form.errors %}
+                            {% for error in form.avatar.errors %}
+                            <p class="text-center mt-1 error">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                            <p class="mt-2"><label>Год рождения</label></p>
+                            <p>{{ form.birth_year }}</p>
+                            {% if form.errors %}
+                            {% for error in form.birth_year.errors %}
+                            <p class="text-center mt-1 error">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                            <p class="mt-2"><label>e-mail</label></p>
+                            <p>{{ form.email }}</p>
+                            {% if form.errors %}
+                            {% for error in form.email.errors %}
+                            <p class="text-center mt-1 error">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                            <p class="mt-2"><label>Локация</label></p>
+                            <p>{{ form.location }}</p>
+                            {% if form.errors %}
+                            {% for error in form.location.errors %}
+                            <p class="text-center mt-1 error">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                            <div class="text-center">
+                                <input class="btn btn-primary" type="submit" value="{{ bttntxt }}">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

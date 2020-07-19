@@ -1,0 +1,40 @@
+{% block title %}My Library — User {{ username }} {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col col-sm-4">
+            <img class="avatar" src="{{ extra_data.avatar.url }}" alt="">
+        </div>
+        <div class="col col-sm-8">
+            <h2>Аккаунт {{ username }}</h2>
+            <hr>
+            <p class="font-weight-bold">имя: <span class="font-weight-normal">
+                    {{ username }}
+                </span>
+            </p>
+            <p class="font-weight-bold">e-mail: <span class="font-weight-normal">
+                    {{ extra_data.email }}
+                </span>
+            </p>
+            <p class="font-weight-bold">локация: <span class="font-weight-normal">
+                    {{ extra_data.location }}
+                </span>
+            </p>
+            <p class="font-weight-bold">год рождения: <span class="font-weight-normal">
+                    {{ extra_data.birth_year }}
+                </span>
+            </p>
+            <hr>
+            {% if user.profile %}
+            <a href="/update_user_profile/{{ user.profile.pk }}" class="btn btn-outline-secondary">
+                Редактировать
+            </a>
+            {% else %}
+            <a href="/profile-create/{{ user.profile.pk }}" class="btn btn-outline-secondary">
+                Редактировать
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

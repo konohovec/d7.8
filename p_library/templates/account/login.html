@@ -1,0 +1,82 @@
+{% block title %}My Library — Login{% endblock %}
+
+{% load account socialaccount %}
+
+{% load socialaccount %}
+{% get_providers as socialaccount_providers %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+            <h2 class="text-center">Вход</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+            {% get_providers as socialaccount_providers %}
+
+            {% if socialaccount_providers %}
+            <p class="text-center">{% blocktrans with site.name as site_name %}Войдите под одним из
+                ваших аккаунтов или <a href="/register">зарегистрируйтесь</a></p>
+            {% endblocktrans %}
+
+            <div class="socialaccount_ballot">
+
+                {% for provider in socialaccount_providers %}
+                {% if provider.name == "GitHub" %}
+                <a class="github-link" title="{{ provider.name }}" class="socialaccount_provider {{ provider.id }}"
+                    href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+                    <div class="github-bttn">
+                        <img class="gh-logo" src="{% static 'images/github-logo.jpg' %}" alt="github-logo">
+                        <p class="text-right">вход через {{provider.name}}</p>
+                    </div>
+                </a>
+                {% endif %}
+                {% endfor %}
+
+            </div>
+
+            {% include "socialaccount/snippets/login_extra.html" %}
+
+            {% else %}
+            <p>{% blocktrans %}If you have not created an account yet, then please
+                <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+            <div class="border login-form bg-light">
+                <h4 class="text-center mb-4">My Library аккаунт</h3>
+                <form method="POST" action="{% url 'account_login' %}">
+                    <div class="form-group">
+                        <div class="form-input-fields">
+                            {% csrf_token %}
+                            <p class="mt-2"><label>Имя пользователя</label></p>
+                            <p>{{ form.login }}</p>
+                            <p class="mt-2"><label>Пароль</label></p>
+                            <p>{{ form.password }}</p>
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+                            <div class="text-center">
+                                <button class="btn btn-primary" type="submit">{% trans "Войти" %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {% if form.errors %}
+                <p class="text-center error">[ попробуйте ещё ]</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% block content %}
+<h3 class="text-center">Книги у друзей</h3>
+<a href="friend/create" class="add-friend-link">Добавить друга</a>
+<div class="border rounded border-light">
+    <ul class="list-group">
+        {% for friend in object_list%}
+        <li class="list-group-item colored">{{ friend }} <span class="friend">(одолжено книг: {{ friend.book_reader.all|length }})</span>
+            <a class="friend-link" href="{{ friend.id }}/friend_update">дать почитать/забрать &gt;&gt;&gt;</a></li>
+        <ul class="list-group list-group-flush">
+            {% for book in friend.book_reader.all %}
+            <li class="list-group-item inner">&#8226 {{ book }}</li>
+            {% endfor %}
+            <br>
+        </ul>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% block title %}My Library — Register{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+            <h1 class="text-center">Регистрация</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+            <div class="border login-form bg-light">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+
+                        <div class="form-input-fields">
+                            {% csrf_token %}
+                            <p class="mt-2"><label>Имя пользователя</label></p>
+                            <p>{{ form.username }}</p>
+                            <p class="mt-2"><label>Пароль</label></p>
+                            <p>{{ form.password1 }}</p>
+                            <p class="mt-2"><label>Ещё раз пароль</label></p>
+                            <p>{{ form.password2 }}</p>
+                            <div class="text-center">
+                                <input class="btn btn-primary" type="submit" value="Зарегистрироваться">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+                {% if form.errors %}
+                {% for error in form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <p class="text-center error">[ {{ error }} ]</p>
+                {% endfor %}
+                {% endfor %}
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7">
+            <h3>{{ book.title }}</h3>
+            <hr>
+            <p><span class="font-weight-bold">Автор:</span> {{ book.author }}</p>
+            <p><span class="font-weight-bold">Год издания:</span> {{ book.year_release }}</p>
+            <p><span class="font-weight-bold">Описание:</span> {{ book.description }}</p>
+            <p><span class="font-weight-bold">Идатель:</span> {{ book.publisher }}</p>
+            <p><span class="font-weight-bold">ISBN:</span> {{ book.ISBN }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col col-sm-12">
+            <h4 class="text-center">Добавить новую книгу</h4>
+            <a href="/index">Главная</a>
+        </div>
+    </div>
+    <div class="row row-margin-top">
+        <div class="col col-sm-12">
+            <form method="post" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="row justify-content-sm-center">
+                    <div class="col-4">
+                        <p>ISBN</p>
+                        {{ form.ISBN}}
+                    </div>
+                    <div class="col-4">
+                        <p>Название</p>
+                        {{ form.title }}
+                    </div>
+                </div>
+                <div class="row justify-content-sm-center">
+                    <div class="col-6">
+                        <p>Автор</p>
+                        {{ form.author}}
+                    </div>
+                    <div class="col-2">
+                        <p>Год издания</p>
+                        {{ form.year_release }}
+                    </div>
+                </div>
+                <div class="row justify-content-sm-center">
+                    <div class="col-8">
+                        <p>Описание</p>
+                        {{ form.description }}
+                    </div>
+                </div>
+                <div class="row justify-content-sm-center">
+                    <div class="col-6">
+                        <p>Издательство</p>
+                        {{ form.redaction }}
+                    </div>
+                    <div class="col-2">
+                        <p>Цена</p>
+                        {{ form.price }}
+                    </div>
+                </div>
+                <div class="row justify-content-sm-center">
+                    <div class="col-2">
+                        <p>Количество копий</p>
+                        {{ form.copy_count }}
+                    </div>
+                    <div class="col-4">
+                            <p>Изображение</p>
+                        {{ form.image }}
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-secondary book-form-btn">Сохранить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
